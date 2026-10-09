@@ -19,7 +19,7 @@ class Zayavka:
 wagon_type = input("Тип вагоны: ")
 month = input("Месяц: ")
 decade_ = int(input("Декада: "))
-numbers_ = input("Номера вагонов через запятую:").split(',')
+numbers_ = input("Номера вагонов через запятую:").split(', ')
 
 
 # numbers_list = [29125978, 29126018, 29126026,29125960, 57658841]
