@@ -1,29 +1,27 @@
-from dataclasses import dataclass
+import asyncio
 
-@dataclass
-class Zayavka:
-
-    wagon_type: str
-    numbers: list[str]
-    month: str
-    decade:int
-
-    def count(self):
-        return len(self.numbers)
-
-    def summary(self):
-        numbers_txt = ",".join(map(str, self.numbers))
-        return f"{self.wagon_type}, количество {self.count()}, {self.month}, {self.decade}, {numbers_txt}"
+from bot.setting import main
+from gu_12.zayavka import Zayavka
+from gu_12.letter import save_docx
 
 
-wagon_type = input("Тип вагоны: ")
-month = input("Месяц: ")
-decade_ = int(input("Декада: "))
-numbers_ = input("Номера вагонов через запятую:").split(', ')
+
+def console():
+    wagon_type =  input("Тип вагоны: ")
+    month = input("Месяц: ")
+    decade_ = int(input("Декада: "))
+    numbers_ = input("Номера вагонов: ").replace(",", " ").split()
+
+    try:
+        z1 = Zayavka(wagon_type=wagon_type.lower(), wagons=numbers_, month=month, decade=decade_)
+    except ValueError as e:
+        print(f"Ошибка: {e}")
+        return
 
 
-# numbers_list = [29125978, 29126018, 29126026,29125960, 57658841]
+    print(z1.summary())
+    save_docx(z1)
 
-z1 = Zayavka(wagon_type=wagon_type, numbers=numbers_, month=month, decade=decade_)
-print(z1.summary())
 
+if __name__ == "__main__":
+    asyncio.run(main())
