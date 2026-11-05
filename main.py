@@ -9,7 +9,7 @@ from gu_12.letter import save_docx
 def console():
     wagon_type =  input("Тип вагоны: ")
     month = input("Месяц: ")
-    decade_ = int(input("Декада: "))
+    decade_ = input("Декада: ")
     numbers_ = input("Номера вагонов: ").replace(",", " ").split()
 
     try:
